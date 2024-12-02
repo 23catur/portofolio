@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    $to = "caturwirasyahputara@gmail.com"; // Ganti dengan email tujuan
+    $to = "caturwirasyahputra@gmail.com"; // Ganti dengan email tujuan
     $headers = "From: $email\r\n";
     $headers .= "Reply-To: $email\r\n";
     $headers .= "MIME-Version: 1.0\r\n";
