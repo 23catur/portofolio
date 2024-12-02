@@ -789,6 +789,48 @@ h3.my-profession {
     line-height: 25px;
 }
 
+.filter-btn {
+    background-color: #333;
+    /* Warna latar belakang tombol */
+    color: #fff;
+    /* Warna teks */
+    border: none;
+    /* Hilangkan border */
+    padding: 10px 20px;
+    /* Padding tombol */
+    margin: 5px;
+    cursor: pointer;
+    /* Ganti kursor menjadi pointer */
+    font-size: 14px;
+    /* Ukuran font */
+    border-radius: 5px;
+    /* Sudut melengkung */
+    transition: all 0.3s ease;
+    /* Transisi halus */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Bayangan */
+}
+
+.filter-btn:hover {
+    background-color: #ff9500;
+    /* Warna saat hover */
+    color: #000;
+    /* Warna teks saat hover */
+    transform: scale(1.05);
+    /* Efek zoom */
+}
+
+.filter-btn.active {
+    background-color: #ff9500;
+    /* Warna tombol aktif */
+    color: #000;
+    /* Warna teks tombol aktif */
+    font-weight: bold;
+    /* Tebalkan teks */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    /* Tambahkan bayangan */
+}
+
 
 /* Blog End */
 

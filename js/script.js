@@ -108,3 +108,27 @@ function closeModal() {
 if (window.location.pathname === '/index.html') {
     window.location.pathname = '/';
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    const filterButtons = document.querySelectorAll(".filter-btn"); // Tombol filter
+    const blogItems = document.querySelectorAll(".blog-item"); // Elemen portfolio item
+
+    filterButtons.forEach((button) => {
+        button.addEventListener("click", function() {
+            // Hilangkan class active dari semua tombol
+            filterButtons.forEach((btn) => btn.classList.remove("active"));
+            this.classList.add("active"); // Tambahkan class active ke tombol yang diklik
+
+            const filter = this.getAttribute("data-filter"); // Ambil nilai data-filter
+
+            blogItems.forEach((item) => {
+                // Tampilkan elemen jika sesuai filter, sembunyikan jika tidak
+                if (filter === "all" || item.getAttribute("data-category") === filter) {
+                    item.style.display = "block";
+                } else {
+                    item.style.display = "none";
+                }
+            });
+        });
+    });
+});
