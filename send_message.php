@@ -1,6 +1,11 @@
 <?php
 header('Content-Type: application/json');
 
+// Menampilkan semua error untuk debugging
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = htmlspecialchars(trim($_POST["name"] ?? ''));
     $email = htmlspecialchars(trim($_POST["email"] ?? ''));
@@ -29,13 +34,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $body = "Name: $name\nEmail: $email\nSubject: $subject\n\n$message";
 
-    // Kirim email dan tangani error
-    if (mail($to, $subject, $body, $headers)) {
-        http_response_code(200);
-        echo json_encode(['status' => 'success', 'message' => 'Message sent successfully!']);
+    // Cek apakah fungsi mail() diaktifkan
+    if (function_exists('mail')) {
+        if (mail($to, $subject, $body, $headers)) {
+            http_response_code(200);
+            echo json_encode(['status' => 'success', 'message' => 'Message sent successfully!']);
+        } else {
+            // Debugging tambahan saat mail() gagal
+            error_log("Mail failed. Check SMTP configuration.");
+            http_response_code(500);
+            echo json_encode(['status' => 'error', 'message' => 'Failed to send message.']);
+        }
     } else {
+        error_log("Mail function not available.");
         http_response_code(500);
-        echo json_encode(['status' => 'error', 'message' => 'Failed to send message.']);
+        echo json_encode(['status' => 'error', 'message' => 'Mail function not available on the server.']);
     }
 } else {
     http_response_code(405); // Method Not Allowed
