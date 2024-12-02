@@ -132,3 +132,39 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
+
+document.getElementById('contactForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Mencegah reload halaman
+
+    const form = event.target;
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+            method: form.method,
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: data.message
+                });
+                form.reset(); // Reset form jika berhasil
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: data.message
+                });
+            }
+        })
+        .catch(error => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'An unexpected error occurred.'
+            });
+        });
+});
